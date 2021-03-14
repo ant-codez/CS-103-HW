@@ -19,7 +19,7 @@ using namespace std;
 
 
 // Function Prototypes
-
+int ReadFile(ifstream &, int, int, int, int, int, int ,int, int);
 
 
 // ==== main ==================================================================
@@ -30,6 +30,8 @@ int main(){
     int totalChars = 0, totalUpper = 0, totalLower = 0, totalDigits = 0, totalPunct = 0, totalSpace = 0, totalLines = 0;
     int totalPeriods = 0, totalQuestion = 0;
     ifstream text("dracula.txt");
+
+    text >> std::noskipws;
     
     totalChars = ReadFile(text, totalUpper, totalLower, totalDigits, totalPunct, totalSpace, totalLines, totalPeriods, totalQuestion);
 
@@ -38,10 +40,22 @@ int main(){
 
 int ReadFile(ifstream &inFile, int totalUpper, int totalLower, int totalDigits, int totalPunct, int totalSpace, int totalLines, int totalPeriods, int totalQuestion){
     char c;
+    string s;
     int totalChars = 0;
 
-    while (inFile >> c){
-        totalChars++;
+    
+
+    
+    while (inFile.get(c)){
+        //c = infile.get();
+
+        if (c == '\n' || c == '\f' || c == '\r'){
+            totalLines++;
+        }
+        else{
+            totalChars++;
+        }
+
         if (isupper(c)){
             totalUpper++;
         }
@@ -57,14 +71,25 @@ int ReadFile(ifstream &inFile, int totalUpper, int totalLower, int totalDigits, 
         else if(isspace(c)){
             totalSpace++;
         }
-        else if(c == '\n'){
-            totalLines++;
-        }
-        else if(c == '.'){
+
+        if(c == '.'){
             totalPeriods++;
         }
-        else if (c =='?'){
+        else if (c == '?'){
             totalQuestion++;
         }
+        //cout << c << endl;
     }
+
+    printf("File \"dracula.txt\" contains the following:\nUppercase letters:\t%i\n", totalUpper);
+    printf("Lowercase letters:\t%i\n", totalLower);
+    printf("Digits:\t%i\n", totalDigits);
+    printf("Punctuation characters:\t%i\n", totalPunct);
+    printf("Whitespace characters:\t%i\n", totalSpace);
+    printf("Lines:\t%i\n", totalLines);
+    printf("Total Periods:\t%i\n", totalPeriods);
+    printf("Total Question Marks:\t%i\n", totalQuestion);
+    printf("Total characters read:\t%i\n", totalChars);
+
+    return (totalChars);
 }
