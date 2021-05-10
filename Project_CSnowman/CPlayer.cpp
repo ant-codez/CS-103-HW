@@ -23,7 +23,13 @@ using namespace std;
 //
 // ============================================================================
 
-
+CPlayer::CPlayer(){
+    CSnowmanGame Game;
+    m_name = new char [strlen("Guest Player") + 1];
+    strcpy(m_name, "Guest Player");
+    m_gameResetted = false;
+    m_game = Game;
+}
 
 
 
@@ -39,7 +45,13 @@ using namespace std;
 // ============================================================================
 
 
-    
+CPlayer::CPlayer(char const* name){
+    CSnowmanGame Game;
+    m_name = new char [strlen(name) + 1];
+    strcpy(m_name, name);
+    m_gameResetted = false;
+    m_game = Game;
+}
 
 
 
@@ -53,7 +65,9 @@ using namespace std;
 //
 // ============================================================================
 
-
+CPlayer::~CPlayer(){
+    delete m_name;
+}
 
 
 
@@ -70,7 +84,10 @@ using namespace std;
 //
 // ============================================================================
 
-
+void CPlayer::SetName(char const* name){
+    m_name = new char [strlen(name) + 1];
+    strcpy(m_name, name);
+}
 
 
 
@@ -86,7 +103,9 @@ using namespace std;
 //
 // ============================================================================
 
-
+const char* CPlayer::GetName() const{
+    return m_name;
+}
 
 
 
@@ -107,7 +126,15 @@ using namespace std;
 // ============================================================================
 
 
+void CPlayer::Start(){
+    if (!m_gameResetted){
+        cout << "\t\tYou're about to play the game Snowman\n\n";
+        cout << "\t\tPlease wait while the game loads...\n\n";
+        sleep(SLEEP_NUM_PLAYER);
+    }
 
+    m_game.Start();
+}
 
 
 // ==== CPlayer::Reset ========================================================
@@ -126,3 +153,12 @@ using namespace std;
 // ============================================================================
 
 
+void CPlayer::Reset(){
+
+    cout << "Restarting message...\n\n";
+    cout << "Reloading message...\n\n";
+
+    sleep (SLEEP_NUM_PLAYER);
+
+    m_game.Reset();
+}

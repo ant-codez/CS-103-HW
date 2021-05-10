@@ -5,7 +5,9 @@
 // ============================================================================
 
 #include <iostream>
+#include <string>
 #include <fstream>
+#include <cstring>
 #include <cstdlib>  // srand function
 #include <ctime>    // time function
 #include "CWords.h"
@@ -24,7 +26,14 @@ using namespace std;
 //
 // ============================================================================
 
+CWords::CWords(){
 
+    std::cout << "CWORDS CONSTRUCTOR\n";
+
+    m_numWords = 0;
+    *m_words = new char [NUM_WORDS];
+    ReadFile();
+}
 
 
 
@@ -37,7 +46,9 @@ using namespace std;
 //
 // ============================================================================
 
-
+CWords::~CWords(){
+    delete m_words;
+}
 
 
 
@@ -56,7 +67,20 @@ using namespace std;
 //
 // ============================================================================
 
+const char *CWords::GetRandomWord() const{
+    const char* word;
+    int r;
 
+    srand(time(NULL));
+
+    r = (rand() % m_numWords) + 1;
+
+    word = m_words[r];
+
+    cout << "R = " << r << " Word = " << word;
+
+    return word; 
+}
 
 
 
@@ -73,4 +97,22 @@ using namespace std;
 //
 // ============================================================================
 
+void CWords::ReadFile(){
+    string text;
+    std::ifstream ReadFile("ListOfMarvelCharacters.txt");
 
+    std::cout << "READING FILE\n";
+
+    //read file line by line
+    while (getline(ReadFile, text)){
+
+        //allocate space for each word in char array
+        m_words[m_numWords] = new char [strlen(text.c_str()) + 1];
+        strcpy(m_words[m_numWords], text.c_str());
+
+        m_numWords++;
+        cout << text << endl;
+    }
+
+    cout << "Total words = " << m_numWords++ << endl;
+}

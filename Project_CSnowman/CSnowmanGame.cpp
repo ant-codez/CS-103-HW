@@ -24,7 +24,9 @@ using namespace std;
 //
 // ============================================================================
 
-
+CSnowmanGame::CSnowmanGame(){
+    Reset();
+}
 
 
 // ==== CSnowmanGame::Start ===================================================
@@ -45,7 +47,16 @@ using namespace std;
 //
 // ============================================================================
 
+void CSnowmanGame::Start(){
+    system("clear");
 
+    DispSnowmanTitle();
+    DrawSnowman(m_numTries);
+    DrawAvailLetters();
+    //draw number of tries
+    DispWordDash();
+    GetUserGuess();
+}
 
 
 // ==== CSnowmanGame::Reset ===================================================
@@ -62,7 +73,14 @@ using namespace std;
 // ============================================================================
 
 
-
+void CSnowmanGame::Reset(){
+    m_numTries = NUM_TRIES;
+    m_wordToGuess = new char[256];
+    m_letterGuessed  = new bool[NUM_ALPHA_CHARS];
+    m_lettersInWord = new char[NUM_ALPHA_CHARS;]
+    m_letterGuessed = { 0 };
+    m_letterInWord = { 0 };
+}
 
 
 // ==== CSnowmanGame::DrawAvailLetters ========================================
@@ -81,7 +99,9 @@ using namespace std;
 //
 // ============================================================================
 
+void CSnowmanGame::DrawAvailLetters() const {
 
+}
 
 
 // ==== CSnowmanGame::DispWordDash ============================================
