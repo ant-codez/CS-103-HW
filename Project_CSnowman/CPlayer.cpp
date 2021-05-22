@@ -24,6 +24,7 @@ using namespace std;
 // ============================================================================
 
 CPlayer::CPlayer(){
+    printf("CPlayer default Constructor!!\n");
     CSnowmanGame Game;
     m_name = new char [strlen("Guest Player") + 1];
     strcpy(m_name, "Guest Player");
@@ -46,10 +47,12 @@ CPlayer::CPlayer(){
 
 
 CPlayer::CPlayer(char const* name){
-    CSnowmanGame Game;
+    printf("CPlayer type Constructor!!\n");
     m_name = new char [strlen(name) + 1];
     strcpy(m_name, name);
     m_gameResetted = false;
+    
+    CSnowmanGame Game;
     m_game = Game;
 }
 
@@ -127,6 +130,7 @@ const char* CPlayer::GetName() const{
 
 
 void CPlayer::Start(){
+    
     if (!m_gameResetted){
         cout << "\t\tYou're about to play the game Snowman\n\n";
         cout << "\t\tPlease wait while the game loads...\n\n";
@@ -134,6 +138,9 @@ void CPlayer::Start(){
     }
 
     m_game.Start();
+    
+
+   printf("The start function!!\n");
 }
 
 

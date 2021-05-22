@@ -47,7 +47,7 @@ CWords::CWords(){
 // ============================================================================
 
 CWords::~CWords(){
-    delete m_words;
+    delete[] m_words;
 }
 
 
@@ -77,7 +77,7 @@ const char *CWords::GetRandomWord() const{
 
     word = m_words[r];
 
-    cout << "R = " << r << " Word = " << word;
+    //cout << "R = " << r << " Word = " << word;
 
     return word; 
 }
@@ -101,8 +101,6 @@ void CWords::ReadFile(){
     string text;
     std::ifstream ReadFile("ListOfMarvelCharacters.txt");
 
-    std::cout << "READING FILE\n";
-
     //read file line by line
     while (getline(ReadFile, text)){
 
@@ -111,8 +109,9 @@ void CWords::ReadFile(){
         strcpy(m_words[m_numWords], text.c_str());
 
         m_numWords++;
-        cout << text << endl;
+        //cout << text << endl;
     }
 
-    cout << "Total words = " << m_numWords++ << endl;
+    //cout << "Total words = " << m_numWords++ << endl;
+    std::cout << "FINISHED READING FILE\n";
 }

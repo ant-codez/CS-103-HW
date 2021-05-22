@@ -4,12 +4,15 @@
 // This is an implementation file for the CSnowmanGame class.
 // ============================================================================
 
-#include <iostream>
+
 #include <cstring>
+#include <unordered_map>
 #include <unistd.h>         	// sleep function
 // #include "IntToCStringLib.h"	// uncomment if you are going to use the included 
 								// functions
 #include "CSnowmanGame.h"
+#include <iostream>
+#include <iomanip>
 using namespace std;
 
 
@@ -25,6 +28,8 @@ using namespace std;
 // ============================================================================
 
 CSnowmanGame::CSnowmanGame(){
+    printf("CSnowmanGame constructor!!\n");
+
     Reset();
 }
 
@@ -49,13 +54,14 @@ CSnowmanGame::CSnowmanGame(){
 
 void CSnowmanGame::Start(){
     system("clear");
-
+    printf("Starting game....\n");
     DispSnowmanTitle();
     DrawSnowman(m_numTries);
     DrawAvailLetters();
     //draw number of tries
     DispWordDash();
     GetUserGuess();
+    
 }
 
 
@@ -74,12 +80,20 @@ void CSnowmanGame::Start(){
 
 
 void CSnowmanGame::Reset(){
+    printf("CSnowmanGame Reset()\n");
+    CWords Word;
+    printf("Test\n");
+    m_words = Word;
     m_numTries = NUM_TRIES;
-    m_wordToGuess = new char[256];
-    m_letterGuessed  = new bool[NUM_ALPHA_CHARS];
-    m_lettersInWord = new char[NUM_ALPHA_CHARS;]
-    m_letterGuessed = { 0 };
-    m_letterInWord = { 0 };
+    strcpy(m_wordToGuess, m_words.GetRandomWord());
+
+    m_letterGuessed[NUM_ALPHA_CHARS] = {0};
+    m_lettersInWord[NUM_ALPHA_CHARS] = {0};
+    m_wordLen = strlen(m_wordToGuess);
+    m_guessedWord = false;
+    m_numUniqueLetters = GetNumUniqueLetters();
+
+    printf("WORD TO GUESS = %s\nNUM UNIQUE LETTERS = %d\n", m_wordToGuess, m_numUniqueLetters);
 }
 
 
@@ -101,6 +115,21 @@ void CSnowmanGame::Reset(){
 
 void CSnowmanGame::DrawAvailLetters() const {
 
+    cout << "================================================================================\n\n";
+    cout << setw(25);
+
+    for (char i = 'A'; i <= 'Z'; i++){
+        cout << i << " ";
+        if (i == 'M')
+        {
+            cout << endl;
+            cout << setw(25);
+        }
+            
+    }
+    cout << endl << endl;
+    cout << "================================================================================\n\n";
+
 }
 
 
@@ -120,7 +149,19 @@ void CSnowmanGame::DrawAvailLetters() const {
 //
 // ============================================================================
 
+void CSnowmanGame::DispWordDash() const{
 
+    for (int i = 0; i < (int)strlen(m_wordToGuess); i++){
+        
+        if (m_letterGuessed[m_wordToGuess[i] - 'A'] == true)
+            printf("%c", m_wordToGuess[i]);
+        else if (isalpha(m_wordToGuess[i]))
+            printf("_");
+        else
+            printf("%c", m_wordToGuess[i]);
+    }
+
+}
 
 
 // ==== CSnowmanGame::GetUserGuess ============================================
@@ -137,7 +178,17 @@ void CSnowmanGame::DrawAvailLetters() const {
 //
 // ============================================================================
 
+void CSnowmanGame::GetUserGuess(){
+    char guess;
 
+    printf("Enter your guess one char at a time (not case-sensitive): ");
+    cin >> guess;
+
+    m_letterGuessed['A' - guess] = true;
+
+    IsValidGuess(guess);
+
+}
 
 
 // ==== CSnowmanGame::IsValidGuess ============================================
@@ -159,7 +210,27 @@ void CSnowmanGame::DrawAvailLetters() const {
 //
 // ============================================================================
 
+bool CSnowmanGame::IsValidGuess(char guess){
 
+    if (!isalpha(guess)){
+        printf("The guess you entered is not an alphabetical character. Try again...\n");
+        sleep(SLEEP_NUM_SNOWMAN);
+        return false;
+    }
+    else if (m_letterGuessed[toupper(guess) - 'A'] == true){
+        printf("You already tried that letter, silly. Try again...\n");
+        sleep(SLEEP_NUM_SNOWMAN);
+        return false;
+    }
+    else if (m_letterGuessed[toupper(guess) - 'A'] == false){
+        printf("Not guessed yet message...\n");
+        sleep(SLEEP_NUM_SNOWMAN);
+        m_numTries--;
+        return true;
+    }
+
+    return true;
+}
 
 
 // ==== CSnowmanGame::GetNumUniqueLetters =====================================
@@ -176,7 +247,17 @@ void CSnowmanGame::DrawAvailLetters() const {
 //
 // ============================================================================
 
+int CSnowmanGame::GetNumUniqueLetters(){
+    
+    /*
+    unordered_map<char, int> m;
 
+    for (int i = 0; i < (int)strlen(m_wordToGuess) + 1; i++){
+        m[m_wordToGuess[i]]++;
+    }
+    */
+    return 10;
+}
 
 // ==== CSnowmanGame::DrawSnowman =============================================
 //
@@ -191,7 +272,27 @@ void CSnowmanGame::DrawAvailLetters() const {
 //
 // ============================================================================
 
+void CSnowmanGame::DrawSnowman(int numTries) const {
 
+    if (numTries == 8)
+        DrawSnowmanPart0();
+    else if (numTries == 7)
+        DrawSnowmanPart1();
+    else if (numTries == 6)
+        DrawSnowmanPart2();
+    else if (numTries == 5)
+        DrawSnowmanPart3();
+    else if (numTries == 4)
+        DrawSnowmanPart4();
+    else if (numTries == 3)
+        DrawSnowmanPart5();
+    else if (numTries == 2)
+        DrawSnowmanPart6();
+    else if (numTries == 1)
+        DrawSnowmanPart7();
+    else if (numTries == 0)
+        DrawSnowmanPart8();
+}
 
 
 // ==== CSnowmanGame::DispTitle ===============================================

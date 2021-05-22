@@ -23,8 +23,11 @@ using namespace std;
 
 int main ()
 {
+    printf("main!!\n");
     // Create a CPlayer object
     CPlayer    player1("Darth Vader");
+
+    printf("Below player1\n");
     
     // Or Create a basic (guest) player
     // CPlayer  player1;
