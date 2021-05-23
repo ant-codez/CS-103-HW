@@ -56,6 +56,7 @@ private:
     bool    IsValidGuess(char guess);
     int     GetNumUniqueLetters();
     void    DispSnowmanTitle();
+    bool    CheckWin();
 };
 
 

@@ -28,10 +28,12 @@ using namespace std;
 
 CWords::CWords(){
 
-    std::cout << "CWORDS CONSTRUCTOR\n";
+    //std::cout << "CWORDS CONSTRUCTOR\n";
 
     m_numWords = 0;
-    *m_words = new char [NUM_WORDS];
+    for (int i = 0; i < NUM_WORDS; i++){
+        m_words[i] = new char [CHAR_SIZE];
+    }
     ReadFile();
 }
 
@@ -47,7 +49,10 @@ CWords::CWords(){
 // ============================================================================
 
 CWords::~CWords(){
-    delete[] m_words;
+    //printf("CWORDS DESTRUCTOR\n");
+    for (int i = 0; i < m_numWords; ++i){
+        delete []m_words[i];
+    }
 }
 
 
@@ -74,11 +79,8 @@ const char *CWords::GetRandomWord() const{
     srand(time(NULL));
 
     r = (rand() % m_numWords) + 1;
-
     word = m_words[r];
-
-    //cout << "R = " << r << " Word = " << word;
-
+    
     return word; 
 }
 
@@ -103,15 +105,7 @@ void CWords::ReadFile(){
 
     //read file line by line
     while (getline(ReadFile, text)){
-
-        //allocate space for each word in char array
-        m_words[m_numWords] = new char [strlen(text.c_str()) + 1];
         strcpy(m_words[m_numWords], text.c_str());
-
         m_numWords++;
-        //cout << text << endl;
     }
-
-    //cout << "Total words = " << m_numWords++ << endl;
-    std::cout << "FINISHED READING FILE\n";
 }
