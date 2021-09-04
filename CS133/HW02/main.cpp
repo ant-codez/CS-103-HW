@@ -1,20 +1,20 @@
 // ============================================================================
 // File: main.cpp
 // ============================================================================
-// Programmer: ???
-// Date: ???
+// Programmer: Anthony Chavez
+// Date: 9/4/2021
 // Class: CSCI 133 ("Data Structures Using C++")
-// Time: ???
 // Instructor: Dr. Rodriguez
-// Project: ???
+// Project: HW02 : CMathStud
 //
 // Description:
 //      This program demonstrates the usage of advanced class composition
 //
 // ============================================================================
 
-???
-
+#include "cmathstud.h"
+#include <iostream>
+using namespace std;
 
 int     main()
 {
