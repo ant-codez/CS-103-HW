@@ -1,0 +1,10 @@
+PART D:
+
+Power1.cpp : 3^32 = 32 Multiplications
+             3^19 = 19 Multiplications
+
+Power2.cpp : 3^32 = 33 Multiplications
+             3^19 = 20 Multiplications
+
+Power3.cpp : 3^32 = 33 Multiplications
+             3^19 = 20 Multiplications
