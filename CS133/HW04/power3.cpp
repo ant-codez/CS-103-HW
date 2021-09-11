@@ -17,29 +17,25 @@
 #include <iostream>
 using namespace std;
 
-int power(int num, int raised, int i){
-       printf("Calls = %i\n", i++);
+long long power(int num, int raised){
     if (raised == 0)
         return 1;
     else if (raised % 2 == 0)
-        return power(num, raised / 2, i) * power(num, raised / 2, i);
+        return power(num, raised / 2) * power(num, raised / 2);
     else
-        return num * power(num, raised / 2, i) * power(num, raised / 2, i);
+        return num * power(num, raised / 2) * power(num, raised / 2);
 }
 
 int main(){
     int x = 0;
     int n = 0;
-    int i = 0;
-    int total = 1;
 
     printf("Please enter an x value\n");
     cin >> x;
-    total = x;
     printf("Please enter the power you would like to raise it too\n");
     cin >> n;
 
-    printf("%i to the power of %i = %i", x, n, power(x, n, i));
+    printf("%i to the power of %i = %lli", x, n, power(x, n));
 
     return (0);
 }

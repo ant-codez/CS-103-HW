@@ -39,6 +39,5 @@ int main(){
     }
 
     printf("%i to the power of %i = %lli", x, n, total);
-    printf("\nTotal itterations = %i", i);
     return (0);
 }
