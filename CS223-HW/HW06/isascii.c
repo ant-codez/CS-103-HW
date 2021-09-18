@@ -11,7 +11,7 @@ void readBit(int c, int total, int *p){
 
     if (bit == 1){
         printf("NON-ASCII INPUT: %X at offset 0x%i\n", originalBit, total);
-        p++;
+        *p += 1;
     }
 }
 
