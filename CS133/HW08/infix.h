@@ -11,7 +11,7 @@
 #include <cctype>
 #include "stack.h"
 #include <stdio.h>
-#include <Math.h>
+#include <cmath>
 
 using namespace std;
 

@@ -18,7 +18,7 @@ using namespace std;
 #include    "clinkedlist.h"
 
 // global constants
-const int MAX_ITEMS = 4;
+const int MAX_ITEMS = 5;
 
 
 // ==== main ==================================================================
@@ -55,7 +55,8 @@ int     main()
         {
             cerr << "\nError in adding " << numToAdd[i] << " to the list!\n\n";
         }
-
+        cout << "Number of items: " << list.GetCurrentSize() << endl << endl;
+        list.DisplayListAscending();    
     }
 
     // 4) Display the current list in ascending and descending order

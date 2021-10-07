@@ -15,7 +15,10 @@
 // nullptr and leaves item unintialized (garbage).
 //
 // ============================================================================
-
+Node::Node(){
+    m_next = nullptr;
+    m_prev = nullptr;
+}
 
 
 
@@ -25,7 +28,11 @@
 // nullptr and initialzes m_item.
 //
 // ============================================================================
-
+Node::Node(const ListItemType &item){
+    m_next = nullptr;
+    m_prev = nullptr;
+    m_item = item;
+}
 
 
 
@@ -35,7 +42,11 @@
 // m_item.
 //
 // ============================================================================
-
+Node::Node(const ListItemType &item, Node *next, Node *prev){
+    m_next = next;
+    m_prev = prev;
+    m_item = item;
+}
 
 
 
@@ -51,7 +62,9 @@
 //      void
 //
 // ============================================================================
-
+void Node::SetItem(const ListItemType &item){
+    m_item = item;
+}
 
 
 
@@ -66,7 +79,9 @@
 //      void
 //
 // ============================================================================
-
+void Node::SetNext(Node *next){
+    m_next = next;
+}
 
 
 
@@ -81,7 +96,9 @@
 //      void
 //
 // ============================================================================
-
+void Node::SetPrev(Node *prev){
+    m_prev = prev;
+}
 
 
 
@@ -96,7 +113,9 @@
 //      ListItemType
 //
 // ============================================================================
-
+ListItemType Node::GetItem() const {
+    return m_item;
+}
 
 
 
@@ -111,7 +130,9 @@
 //      Node pointer
 //
 // ============================================================================
-
+Node* Node::GetNext() const {
+    return m_next;
+}
 
 
 
@@ -126,4 +147,6 @@
 //      Node pointer
 //
 // ============================================================================
-
+Node* Node::GetPrev() const {
+    return  m_prev;
+}

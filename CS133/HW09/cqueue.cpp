@@ -23,7 +23,9 @@ using namespace std;
 //      void
 //
 // ============================================================================
-
+void CQueue::DestroyQueue() {
+    m_qList.DestroyList();
+}
 
 
 
@@ -43,7 +45,26 @@ using namespace std;
 //      bool (true if successful, otherwise false)
 //
 // ============================================================================
+bool CQueue::Dequeue() throw (CQueueException) {
+    QueueItemType temp;
 
+    try {
+        m_qList.GetItem(0, temp);
+    }
+    catch (const CLinkedListException &exceptObj) {
+        throw CQueueException("CQueue::Dequeue", exceptObj.GetMsg());
+        return false;
+    }
+    
+    try {
+        return m_qList.Remove(temp);
+    }
+    catch (const CLinkedListException &exceptObj) {
+        throw CQueueException("CQueue::Dequeue", exceptObj.GetMsg());
+        return false;
+    }
+
+}
 
 
 
@@ -59,7 +80,9 @@ using namespace std;
 //      bool
 //
 // ============================================================================
-
+bool CQueue::Enqueue(const QueueItemType &newItem) {
+    return m_qList.Add(newItem);
+}
 
 
 
@@ -78,7 +101,17 @@ using namespace std;
 //      void
 //
 // ============================================================================
+QueueItemType CQueue::PeekFront() const throw (CQueueException) {
+    QueueItemType temp;
 
+    try {
+        m_qList.GetItem(0, temp);
+        return temp;
+    }
+    catch (const CLinkedListException &exceptObj) {
+        throw CQueueException("CQueue::PeekFront", exceptObj.GetMsg());
+    }
+}
 
 
 
@@ -94,4 +127,6 @@ using namespace std;
 //      A boolean value. True if list is empty, false otherwise.
 //
 // ============================================================================
-
+bool CQueue::IsEmpty() const {
+    return m_qList.IsEmpty();
+}

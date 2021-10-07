@@ -16,7 +16,9 @@ using namespace std;
 // This is the default constructor that sets the head pointer to nullptr
 //
 // ============================================================================
-
+CLinkedList::CLinkedList(){
+    headPtr = nullptr;
+}
 
 
 
@@ -26,7 +28,9 @@ using namespace std;
 // This is the destructor, which releases all the nodes.
 //
 // ============================================================================
-
+CLinkedList::~CLinkedList(){
+    DestroyList();
+}
 
 
 
@@ -42,7 +46,23 @@ using namespace std;
 //      A boolean value of success or failure
 //
 // ============================================================================
+bool CLinkedList::DestroyList() {
+    Node *p = headPtr;
+    Node *n;
 
+    while (p != nullptr){
+        n = p->GetNext();
+        delete p;
+        p = n;
+    }
+
+    if (IsEmpty()) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 
 
 
@@ -62,7 +82,20 @@ using namespace std;
 //      A boolean value
 //
 // ============================================================================
+bool CLinkedList::GetItem(int index, ListItemType &item) const{
+    int currentIndex = 0;
+    Node *p = headPtr;
 
+    while (p->GetNext() != nullptr){
+        if (++currentIndex == index){
+            item = p->GetItem();
+            return true;
+        }
+        p = p->GetNext();
+    }
+
+    return false;
+}
 
 
 
@@ -78,7 +111,18 @@ using namespace std;
 //      A boolean value
 //
 // ============================================================================
+bool CLinkedList::Contains(const ListItemType &item) const {
+    Node *p = headPtr;
 
+    while(p->GetNext() != nullptr){
+        if (p->GetItem() == item){
+            return true;
+        }
+        p = p->GetNext();
+    }
+
+    return false;
+}
 
 
 
@@ -94,7 +138,21 @@ using namespace std;
 //      A int value.
 //
 // ============================================================================
+int CLinkedList::GetCurrentSize() const {
+    if (headPtr == nullptr){
+        return 0;
+    }
 
+    int items = 1;
+    Node *p = headPtr;
+
+    while(p->GetNext() != nullptr){
+        items++;
+        p = p->GetNext();
+    }
+
+    return items;
+}
 
 
 
@@ -111,7 +169,26 @@ using namespace std;
 //      A boolean value of success or failure
 //
 // ============================================================================
+bool CLinkedList::Add(const ListItemType &newItem) {
+    if (headPtr == nullptr){
+        return AddInFront(newItem);
+    }
 
+    if (headPtr->GetItem() > newItem){
+        return AddInFront(newItem);
+    }
+
+    if (tailPtr == nullptr){
+        printf("NULL ");
+        return AddInEnd(newItem);
+    }
+    else if (tailPtr->GetItem() < newItem){
+                printf("END ");
+        return AddInEnd(newItem);
+    }
+
+    return AddInMiddle(newItem);
+}
 
 
 
@@ -127,7 +204,13 @@ using namespace std;
 //      A boolean value. True if list is empty, false otherwise.
 //
 // ============================================================================
-
+bool CLinkedList::IsEmpty() const {
+    if (headPtr == nullptr){
+        return true;
+    }
+    
+    return false;
+}
 
 
 
@@ -143,7 +226,40 @@ using namespace std;
 //      A boolean value of success or failure
 //
 // ============================================================================
+bool CLinkedList::Remove(const ListItemType &value){
+    if (headPtr == nullptr){
+        return false;
+    }
 
+    if (headPtr->GetItem() == value){
+        Node *t = headPtr;
+
+        headPtr = headPtr->GetNext();
+        delete t;
+
+        return true;
+    }
+    
+    Node *p = headPtr;
+
+    while (p->GetNext() != nullptr){
+        if (p->GetNext() != nullptr && p->GetNext()->GetItem() == value){
+            break;
+        }
+        p = p->GetNext();
+    }
+
+    if (p != nullptr) {
+        Node *target = p->GetNext();
+
+        p->SetNext(target->GetNext());
+
+        delete target;
+        return true;
+    }
+
+    return false;
+}
 
 
 
@@ -159,7 +275,27 @@ using namespace std;
 //      A boolean value of success or failure
 //
 // ============================================================================
-  
+bool CLinkedList::Clear() {
+    if (headPtr == nullptr){
+        return true;
+    }
+
+    Node *p = headPtr;
+    Node *temp = new Node;
+
+    while (p->GetNext() != nullptr) {
+        temp = p->GetNext();
+        delete p;
+        p = temp;
+    }
+
+    if (IsEmpty()){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 
 
 
@@ -175,7 +311,20 @@ using namespace std;
 //      void
 //
 // ============================================================================
-  
+void CLinkedList::DisplayListAscending() {
+    if (headPtr == nullptr){
+        printf("\n");
+    }
+    else {
+        Node *p = headPtr;
+
+        while (p->GetNext()) {
+            cout << p->GetItem() << endl;
+
+            p = p->GetNext();
+        }
+    }
+}
 
 
 
@@ -190,7 +339,19 @@ using namespace std;
 //      void
 //
 // ============================================================================
-  
+void CLinkedList::DisplayListDescending() {
+    if (tailPtr == nullptr){
+        printf("\n");
+    }
+    else {
+        Node *p = tailPtr;
+        while (p->GetPrev() != nullptr) {
+            cout << p->GetItem() << endl;
+
+            p = p->GetPrev();
+        }
+    }
+}
 
 
 
@@ -209,8 +370,11 @@ using namespace std;
 //      or 'E'nd)
 //
 // ============================================================================
+/*
+char CLinkedList::NewItemLocation(const ListItemType &newItem) {
 
-
+}
+*/
 
 
 // ==== CLinkedList::AddInFront ===============================================
@@ -224,7 +388,24 @@ using namespace std;
 //      A boolean value of success or failure
 //
 // ============================================================================
+bool CLinkedList::AddInFront(const ListItemType &newItem) {
+    printf("ADD TO FRONT\n");
+    Node *p = new Node(newItem, headPtr, nullptr);
 
+    if (headPtr != nullptr) {
+        headPtr->SetPrev(p);
+    }
+
+    headPtr = p;
+
+    if (tailPtr == nullptr){
+        tailPtr = p;
+    }
+
+    p = nullptr;
+
+    return true;
+}
 
 
 
@@ -240,7 +421,25 @@ using namespace std;
 //      A boolean value of success or failure.
 //
 // ============================================================================
+bool CLinkedList::AddInEnd(const ListItemType &newItem) {
+    printf("ADD TO END\n");
+    Node *n = new Node(newItem, nullptr, tailPtr);
 
+    if (tailPtr != nullptr){
+        n->SetNext(tailPtr->GetNext());
+        tailPtr->SetNext(n);
+    }   
+
+    tailPtr = n;
+
+    if (headPtr == nullptr){
+        headPtr = n;
+    }
+
+    n = nullptr;
+
+    return true;
+}
 
 
 
@@ -256,4 +455,22 @@ using namespace std;
 //      A boolean value of success or failure
 //
 // ============================================================================
+bool CLinkedList::AddInMiddle(const ListItemType &newItem) {
+        printf("ADD TO MID\n");
 
+    Node *p = headPtr;
+
+    while(p->GetNext() != nullptr){
+        if (p->GetNext()->GetItem() > newItem) {
+            break;
+        }
+
+        p = p->GetNext();
+    }
+
+    Node *n = new Node(newItem, p->GetNext(), p);
+
+    p->SetNext(n);
+
+    return Contains(newItem);
+}
