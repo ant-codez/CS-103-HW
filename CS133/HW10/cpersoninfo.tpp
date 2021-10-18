@@ -4,10 +4,6 @@
 // This is the implementation file for cpersoninfo.
 // ============================================================================
 
-#include    ???
-
-
-
 // ==== Default Constructor ===================================================
 //
 // The default constructor sets everything to zero and m_fullName to an empty
@@ -20,7 +16,16 @@
 //      nothing
 //
 // ============================================================================
+template <class T>
+CPersonInfo<T>::CPersonInfo() {
+    m_weight = 0;
+    m_height = 0;
 
+    m_age = new int;
+    *m_age = 0;
+
+    m_fullName = "";
+}
 
 
 // ==== Copy Constructor ======================================================
@@ -34,7 +39,16 @@
 //      nothing
 //
 // ============================================================================
-
+template <class T>
+CPersonInfo<T>::CPersonInfo(const CPersonInfo &cpy) {
+    m_weight = cpy.m_weight;
+    m_height = cpy.m_height;
+    
+    m_age = new int;
+    *m_age = cpy.GetAge();
+    
+    m_fullName = cpy.m_fullName;
+}
 
 
 // ==== Type Constructor ======================================================
@@ -49,7 +63,17 @@
 //      nothing
 //
 // ============================================================================
+template <class T>
+CPersonInfo<T>::CPersonInfo(T weight, T height, int age, std::string fullName) {
+    m_weight = weight;
+    m_height = height;
+    
+    m_age = new int;
+    *m_age = age;
+    
+    m_fullName = fullName;
 
+}
 
 
 // ==== Destructor ============================================================
@@ -63,7 +87,10 @@
 //      nothing
 //
 // ============================================================================
-
+template <class T>
+CPersonInfo<T>::~CPersonInfo() {
+    delete m_age;
+}
 
 
 
@@ -78,7 +105,10 @@
 //      T data type (template)
 //
 // ============================================================================
-
+template <class T>
+T CPersonInfo<T>::GetWeight() const {
+    return m_weight;
+}
 
 
 
@@ -93,7 +123,10 @@
 //      T data type (template)
 //
 // ============================================================================
-
+template <class T>
+T CPersonInfo<T>::GetHeight() const {
+    return m_height;
+}
 
 
 
@@ -108,7 +141,10 @@
 //      int
 //
 // ============================================================================
-
+template <class T>
+int CPersonInfo<T>::GetAge() const {
+    return *m_age;
+}
 
 
 
@@ -123,7 +159,10 @@
 //      string data type
 //
 // ============================================================================
-
+template <class T>
+std::string CPersonInfo<T>::GetName() const {
+    return m_fullName;
+}
 
 
 
@@ -139,7 +178,10 @@
 //      int
 //
 // ============================================================================
-
+template <class T>
+int CPersonInfo<T>::GetNameLength() const {
+    return m_fullName.length();
+}
 
 
 
@@ -154,7 +196,10 @@
 //      void
 //
 // ============================================================================
-
+template <class T>
+void CPersonInfo<T>::SetWeight(T weight) {
+    m_weight = weight;
+}
 
 
 
@@ -169,7 +214,10 @@
 //      void
 //
 // ============================================================================
-
+template <class T>
+void CPersonInfo<T>::SetHeight(T height) {
+    m_height = height;
+}
 
 
 
@@ -184,7 +232,10 @@
 //      void
 //
 // ============================================================================
-
+template <class T>
+void CPersonInfo<T>::SetAge(int Age) {
+    *m_age = Age;
+}
 
 
 
@@ -199,3 +250,7 @@
 //      void
 //
 // ============================================================================
+template <class T>
+void CPersonInfo<T>::SetName(std::string fullName) {
+    m_fullName = fullName;
+}
