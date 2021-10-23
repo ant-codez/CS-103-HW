@@ -1,17 +1,15 @@
 // ============================================================================
 // File: main.cpp
 // ============================================================================
-// Programmer: ???
-// Date: ???
+// Programmer: Anthony Chavez
+// Date: 10/23/2021
 // Class: CSCI 133 ("Data Structures Using C++")
-// Time: ???
 // Instructor: Dr. Rodriguez
 // Project: Inheritance
 //
 // Description:
-//      ???
-//      ???
-//      ???
+//  This project demonstrates the use of polymorphism / Inheritance with the 
+//  Abstract Base Class (ABC) CVehicle and its two pure Virtual Functions. 
 //
 // ============================================================================
 
