@@ -21,7 +21,14 @@ using namespace std;
 //
 // ============================================================================
 
-???
+CVehicle::CVehicle() {
+    m_make = "Two";
+    m_model = "Legs";
+    m_vehicleName = "Sam Witwicky";
+    m_fuelType = 'S';
+    m_fuelLevel = 85.0;
+    SetNumMiles(17000);
+}
 
 
 
@@ -32,10 +39,16 @@ using namespace std;
 //
 // ============================================================================
 
-???
-
-
-
+CVehicle::CVehicle(std::string make, std::string model, std::string vehicleName,
+                 double miles, double fuelLevel, char fuelType) {
+    
+    m_make = make;
+    m_model = model;
+    m_vehicleName = vehicleName;
+    SetNumMiles(miles);
+    m_fuelLevel = 100;
+    m_fuelType = fuelType;
+}
 
 // ==== CVehicle::Driving =====================================================
 //
@@ -61,4 +74,24 @@ using namespace std;
 //
 // ============================================================================
 
-???
+void CVehicle::Driving(double numMiles, double fuelRate, std::string methodTravel, std::string noFuelMesg) {
+    int miles = 0;
+
+    cout << GetVehicleName() << ":\n";
+    cout << "\t\t" << methodTravel << " " << numMiles << " miles..." << endl << endl;
+    
+    while (numMiles > 0) {
+        if (m_fuelLevel <= 0) {
+            cout << GetVehicleName() << ":\n";
+            cout  << "\t\t" << noFuelMesg << endl;
+            cout << "\t\tOnly traveled " << miles << " miles\n";
+            break;
+        }
+
+        m_fuelLevel -= fuelRate;
+
+        numMiles--;
+        SetNumMiles(GetNumMiles() + 1);
+        miles++;
+    }
+}

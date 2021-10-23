@@ -20,23 +20,23 @@ class   CVehicle
                  char fuelType = 'G');
 
     	// member functions
-    	std::string     GetMake() const;
-        std::string     GetModel() const;
-        std::string     GetVehicleName() const;
-        char            GetFuelType() const;
-        double          GetFuelLevel() const;
-        double          GetNumMiles() const;
-        void            SetMake(std::string make);
-        void            SetModel(std::string model);
-        void            SetVehicleName(std::string vehicleName);
-        void            SetFuelType(char fuelType);
-        void            SetFuelLevel(double fuelLevel);
-        void            SetNumMiles(double miles);
+    	std::string     GetMake() const { return m_make; };
+        std::string     GetModel() const { return m_model; };
+        std::string     GetVehicleName() const { return m_vehicleName; };
+        char            GetFuelType() const { return m_fuelType; };
+        double          GetFuelLevel() const  { return m_fuelLevel; };
+        double          GetNumMiles() const { return m_miles; };
+        void            SetMake(std::string make) { m_make = make; };
+        void            SetModel(std::string model) { m_model = model; };
+        void            SetVehicleName(std::string vehicleName) {  m_vehicleName = vehicleName;};
+        void            SetFuelType(char fuelType) { m_fuelType = fuelType; };
+        void            SetFuelLevel(double fuelLevel) { m_fuelLevel = fuelLevel;};
+        void            SetNumMiles(double miles) { m_miles = miles; };
         
         // Create the two functions below as pure virtual functions so that the
         // CVehicle class is an ABC
-        void            Drive(double numMiles);
-        void            DispVehicleInfo() const;
+        virtual void            Drive(double numMiles) = 0;
+        virtual void            DispVehicleInfo() const = 0;
 
     protected:
         // protected data members

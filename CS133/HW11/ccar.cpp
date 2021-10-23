@@ -23,7 +23,16 @@ using namespace std;
 //
 // ============================================================================
 
-???
+CCar::CCar() {
+    SetMake("Honda");
+    SetModel("Civic");
+    SetVehicleName("Rumble");
+    SetFuelType('G');
+    SetFuelLevel(75);
+    SetNumMiles(53000);
+    m_transmission = 'M';
+    m_numDoors = 2;
+}
 
 
 
@@ -34,10 +43,61 @@ using namespace std;
 //
 // ============================================================================
 
-???
+CCar::CCar(std::string make, std::string model, std::string vehicleName,
+             char transmission, int numDoors, double miles, double fuelLevel, 
+             char fuelType){
+    
+    SetMake(make);
+    SetModel(model);
+    SetVehicleName(vehicleName);
+    SetFuelType(fuelType);
+    SetFuelLevel(fuelLevel);
+    SetNumMiles(miles);
+    m_transmission = transmission;
+    m_numDoors = numDoors;
+}
 
 
 
 
 // 2 virtual functions implmentation below
-???
+
+void CCar::DispVehicleInfo() const {
+    cout << GetVehicleName() << " info:\n";
+    cout << "\t\tMake: " << GetMake() << endl;
+    cout << "\t\tModel: " << GetModel() << endl;
+    cout << "\t\tNumber of Miles: " << GetNumMiles() <<endl;
+    cout << "\t\tFuel Level: " << GetFuelLevel() << "%" << endl;
+    cout << "\t\tFuel Type: ";
+
+    switch (GetFuelType()) {
+        case 'G':
+            cout << "Gas\n";
+            break;
+        case 'M':
+            cout << "Diesel\n";
+            break;
+        default:
+            cout << "ERROR\n";
+            break;
+    }
+
+    cout << "\t\tNumber of Doors: " << GetNumberDoors() << endl;
+    cout << "\t\tTransmission: ";
+
+    switch (GetTransmission()) {
+        case 'A':
+            cout << "Automatic\n";
+            break;
+        case 'M':
+            cout << "Manual\n";
+            break; 
+        default:
+            cout << "ERROR\n";
+            break;
+    }
+}
+
+void CCar::Drive(double numMiles) {
+    Driving(numMiles, 0.4, "Car driving", "Ooops, out of fuel! Time to call a tow truck!");
+}

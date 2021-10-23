@@ -24,7 +24,7 @@ using namespace std;
 #include    "ctruck.h"
 
 // function prototypes
-void    DisplayInfo(???);
+void    DisplayInfo(const CVehicle &obj);
 
 
 
@@ -110,7 +110,7 @@ int     main()
 //
 // ============================================================================
 
-void    DisplayInfo(???)
+void    DisplayInfo(const CVehicle &obj)
 {
-	???
+	obj.DispVehicleInfo();
 }
