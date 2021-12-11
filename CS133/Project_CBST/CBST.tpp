@@ -82,7 +82,7 @@ CBST<ItemType>::CBST(const CBST<ItemType> &tree) {
 // =============================================================================
 template<class ItemType>
 CBST<ItemType>::~CBST() {
-    this->DestroyTree(this->GetRootPtr());
+    this->Clear();
 }
 
 
