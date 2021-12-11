@@ -25,7 +25,13 @@ using namespace std;
 //       Nothing
 //
 // =============================================================================
-
+CPersonInfo::CPersonInfo() {
+    m_fname = "";
+    m_lname = "";
+    m_age = 0;
+    m_checking = 0;
+    m_savings = 0;
+}
 
 
 
@@ -48,7 +54,13 @@ using namespace std;
 //       void
 //
 // =============================================================================
-
+CPersonInfo::CPersonInfo(const std::string &fname, const std::string &lname,int age, double checking, double savings) {
+    m_fname = fname;
+    m_lname = lname;
+    m_age = age;
+    m_checking = checking;
+    m_savings = savings;
+}
 
 
 
@@ -65,7 +77,9 @@ using namespace std;
 //       void
 //
 // =============================================================================
-
+void CPersonInfo::SetFirstName(const std::string &fname) {
+      m_fname = fname;
+}
 
 
 
@@ -82,8 +96,9 @@ using namespace std;
 //       void
 //
 // =============================================================================
-
-
+void CPersonInfo::SetLastName(const std::string &lname) {
+      m_lname = lname;
+}
 
 
 
@@ -98,7 +113,9 @@ using namespace std;
 //       void
 //
 // =============================================================================
-
+void CPersonInfo::SetAge(const int age) {
+    m_age = age;
+}
 
 
 
@@ -114,7 +131,9 @@ using namespace std;
 //       void
 //
 // =============================================================================
-
+void CPersonInfo::SetChecking(double checking) {
+    m_checking = checking;
+}
 
 
 
@@ -130,7 +149,9 @@ using namespace std;
 //       void
 //
 // =============================================================================
-
+void CPersonInfo::SetSavings(double savings) {
+    m_savings = savings;
+}
 
 
 
@@ -147,7 +168,9 @@ using namespace std;
 //       A string that represents the first name of a person.
 //
 // =============================================================================
-
+std::string CPersonInfo::GetFirstName() const {
+    return m_fname;
+}
 
 
 
@@ -164,7 +187,9 @@ using namespace std;
 //       A string that represents the last name of a person.
 //
 // =============================================================================
-
+std::string CPersonInfo::GetLastName() const {
+    return m_lname;
+}
 
 
 
@@ -181,7 +206,9 @@ using namespace std;
 //       An int that represents the age of a person.
 //
 // =============================================================================
-
+int CPersonInfo::GetAge() const {
+    return m_age;
+}
 
 
 
@@ -197,7 +224,9 @@ using namespace std;
 //       A double that represents the amount in a person's checking account.
 //
 // =============================================================================
-
+double CPersonInfo::GetChecking() const {
+    return m_checking;
+}
 
 
 
@@ -213,7 +242,9 @@ using namespace std;
 //       A double that represents the amount in a person's savings account.
 //
 // =============================================================================
-
+double CPersonInfo::GetSavings() const {
+    return m_savings;
+}
 
 
 
@@ -230,7 +261,21 @@ using namespace std;
 //       Returns true if the objects are the same, false otherwise.
 //
 // =============================================================================
+bool CPersonInfo::operator==(const CPersonInfo &rhs) {
 
+    if (m_fname != rhs.m_fname) 
+        return false;
+    if (m_lname != rhs.m_lname)
+        return false;
+    if (m_age != rhs.m_age)
+        return false;
+    if (m_checking != rhs.m_checking)
+        return false;
+    if (m_savings != rhs.m_savings)
+        return false;
+
+    return true;
+}
 
 
 
@@ -251,7 +296,9 @@ using namespace std;
 //
 //
 // =============================================================================
-
+bool CPersonInfo::operator>(const CPersonInfo &rhs) {
+    return m_age > rhs.GetAge();
+}
 
 
 
@@ -271,7 +318,9 @@ using namespace std;
 //       Returns true if lhs age is less than rhs age, otherwise false.
 //
 // =============================================================================
-
+bool CPersonInfo::operator<(const CPersonInfo &rhs) {
+  return m_age < rhs.GetAge();
+}
 
 
 
@@ -291,7 +340,21 @@ using namespace std;
 //       An istream reference.
 //
 // =============================================================================
+std::istream& operator>>(std::istream &ins, CPersonInfo &person) {
+    string fname, lname;
+    int age;
+    double checking, savings;
 
+    ins >> fname >> lname >> age >> checking >> savings;
+
+    person.SetFirstName(fname);
+    person.SetLastName(lname);
+    person.SetAge(age);
+    person.SetChecking(checking);
+    person.SetSavings(savings);
+
+    return ins;
+}
 
 
 
@@ -309,5 +372,13 @@ using namespace std;
 //       An ostream reference.
 //
 // =============================================================================
+std::ostream& operator<<(std::ostream &outs, const CPersonInfo &person) {
+    outs << person.GetFirstName() << " ";
+    outs << person.GetLastName() << "\t";
+    outs << person.GetAge() << "\t";
+    outs << "$" << person.GetChecking() << "\t";
+    outs << "$" << person.GetSavings() << endl;
 
+    return outs;
+}
 

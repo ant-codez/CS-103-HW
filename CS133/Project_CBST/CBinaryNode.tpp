@@ -18,7 +18,11 @@
 //       Nothing
 //
 // =============================================================================
-
+template<class ItemType>
+CBinaryNode<ItemType>::CBinaryNode() {
+    m_leftChildPtr = nullptr;
+    m_rightChildPtr = nullptr;
+}
 
 
 
@@ -35,7 +39,12 @@
 //       Nothing
 //
 // =============================================================================
-
+template<class ItemType>
+CBinaryNode<ItemType>::CBinaryNode(const ItemType &item) {
+    m_leftChildPtr = nullptr;
+    m_rightChildPtr = nullptr;
+    m_item = item;
+}
 
 
 
@@ -57,7 +66,12 @@
 //       Nothing
 //
 // =============================================================================
-
+template<class ItemType>
+CBinaryNode<ItemType>::CBinaryNode(const ItemType &item, CBinaryNode<ItemType> *leftChildPtr, CBinaryNode<ItemType> *rightChildPtr) {
+    m_item = item;
+    m_leftChildPtr = leftChildPtr;
+    m_rightChildPtr = rightChildPtr;
+}
 
 
 
@@ -73,7 +87,10 @@
 //       void
 //
 // =============================================================================
-
+template<class ItemType>
+void CBinaryNode<ItemType>::SetItem(const ItemType &item) {
+    m_item = item;
+}
 
 
 
@@ -89,7 +106,10 @@
 //       An ItemType.
 //
 // =============================================================================
-
+template<class ItemType>
+ItemType CBinaryNode<ItemType>::GetItem() const {
+    return m_item;
+}
 
 
 
@@ -105,7 +125,14 @@
 //       Returns true if the node is a leaf, false otherwise.
 //
 // =============================================================================
+template<class ItemType>
+bool CBinaryNode<ItemType>::IsLeaf() const {
+    if (m_leftChildPtr == nullptr && m_rightChildPtr == nullptr){
+        return true;
+    }
 
+    return false;
+}
 
 
 
@@ -121,7 +148,10 @@
 //       Returns a CBinaryNode<ItemType> pointer.
 //
 // =============================================================================
-
+template<class ItemType>
+CBinaryNode<ItemType>* CBinaryNode<ItemType>::GetLeftChildPtr() const {
+    return m_leftChildPtr;
+}
 
 
 
@@ -137,7 +167,10 @@
 //       Returns a CBinaryNode<ItemType> pointer.
 //
 // =============================================================================
-
+template<class ItemType>
+CBinaryNode<ItemType>* CBinaryNode<ItemType>::GetRightChildPtr() const {
+    return m_rightChildPtr;
+}
 
 
 
@@ -154,8 +187,10 @@
 //       void
 //
 // =============================================================================
-
-
+template<class ItemType>
+void CBinaryNode<ItemType>::SetLeftChildPtr(CBinaryNode<ItemType> *leftChildPtr) {
+    m_leftChildPtr = leftChildPtr;
+}
 
 
 
@@ -171,5 +206,8 @@
 //       void
 //
 // =============================================================================
-
+template<class ItemType>
+void CBinaryNode<ItemType>::SetRightChildPtr(CBinaryNode<ItemType> *rightChildPtr) {
+    m_rightChildPtr = rightChildPtr;
+}
 

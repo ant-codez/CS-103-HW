@@ -21,7 +21,8 @@
 //       Nothing
 //
 // =============================================================================
-
+PrecondViolatedExcept::PrecondViolatedExcept(const std::string errorMsg) : m_errorMsg(errorMsg){
+}
 
 
 
@@ -37,7 +38,9 @@
 //       Returns a string.
 //
 // =============================================================================
-
+std::string PrecondViolatedExcept::GetMsg() const {
+    return m_errorMsg;
+}
 
 
 
@@ -53,5 +56,7 @@
 //       Nothing
 //
 // =============================================================================
-
+void PrecondViolatedExcept::SetMsg(const std::string errorMsg) {
+    m_errorMsg = errorMsg;
+}
 

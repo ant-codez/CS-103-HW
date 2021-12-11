@@ -1,10 +1,9 @@
 // ============================================================================
 // File: main.cpp
 // ============================================================================
-// Programmer: ???
-// Date: ???
+// Programmer: Anthony Chavez
+// Date: 12/10/2021
 // Class: CSCI 133 ("Data Structures Using C++")
-// Time: ???
 // Instructor: Dr. Rodriguez
 // Project: Project CBST
 //
@@ -60,6 +59,8 @@ int     main()
     {
         treeList.Add(people[index]);
     }
+
+
 
     // Display the treeList in pre-order
     cout << "\n\nDisplaying treeList in pre-order\n\n";

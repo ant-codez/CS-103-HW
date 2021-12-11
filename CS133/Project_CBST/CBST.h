@@ -46,7 +46,7 @@ public:
 
    /** Removes a node from the tree.  This function calls the function 
        RemoveValue.
-    @param target: An ItemType that will be used to find the node to delete.
+    @param anEntry: An ItemType that will be used to find the node to delete.
     @return  True if remove was successful, or false if it is not. */
    virtual bool Remove(const ItemType &anEntry);
 
@@ -54,6 +54,11 @@ public:
     @param rhs: A const CBST reference object.
     @return  CBST reference object. */
    CBST<ItemType>& operator=(const CBST<ItemType> &rhs); 
+
+    /** Finds the balance factor of the subTree
+    @param subTreePtr: A pointer to the node we want to find the balance factor of
+    @return  int of the current balance factor. */
+   int getBalanceFactor(const CBinaryNode<ItemType> *subTreePtr);
 
  
 protected:
